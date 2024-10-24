@@ -99,7 +99,7 @@ for i in range(10):
     print(generate_phrase(parse_bnf(BNF), 'E'))
 ```
 
-Задача 5
+### Задача 5
 Язык выражений алгебры логики.
 ```bash
 BNF = '''
