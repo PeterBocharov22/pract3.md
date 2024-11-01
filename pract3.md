@@ -17,6 +17,8 @@
 }
 ```
 
+![image](https://github.com/user-attachments/assets/f0268671-2d75-4a95-93ab-930ee577a996)
+
 ### Задача 2
 Реализовать на Dhall приведенный ниже пример в формате JSON. Использовать в реализации свойство программируемости и принцип DRY.
 ```
@@ -63,45 +65,115 @@ let students : List Student =
 in  { groups = groups, students = students, subject = "Конфигурационное управление" }
 ```
 
+![image](https://github.com/user-attachments/assets/9615d2ed-43d2-4737-9818-d1b7921fdcd2)
+
 ### Задача 3
 Язык нулей и единиц.
 
-10
-100
-11
-101101
-000
+```
+import random
 
-```bash
+
+def parse_bnf(text):
+    '''
+    Преобразовать текстовую запись БНФ в словарь.
+    '''
+    grammar = {}
+    rules = [line.split('=') for line in text.strip().split('\n')]
+    for name, body in rules:
+        grammar[name.strip()] = [alt.split() for alt in body.split('|')]
+    return grammar
+
+
+def generate_phrase(grammar, start):
+    '''
+    Сгенерировать случайную фразу.
+    '''
+    if start in grammar:
+        seq = random.choice(grammar[start])
+        return ''.join([generate_phrase(grammar, name) for name in seq])
+    return str(start)
+
+
 BNF = '''
-E = 10 | 100 | 11 | 101101 | 000
+E = 0 E | 1 E |
 '''
 
 for i in range(10):
     print(generate_phrase(parse_bnf(BNF), 'E'))
+
 ```
+
+![image](https://github.com/user-attachments/assets/1d968017-39ab-4416-a87c-619fefd165a3)
 
 ### Задача 4
 Язык правильно расставленных скобок двух видов.
 
-(({((()))}))
-{}
-{()}
-()
-{}
+```
+import random
 
-```bash
+
+def parse_bnf(text):
+    '''
+    Преобразовать текстовую запись БНФ в словарь.
+    '''
+    grammar = {}
+    rules = [line.split('=') for line in text.strip().split('\n')]
+    for name, body in rules:
+        grammar[name.strip()] = [alt.split() for alt in body.split('|')]
+    return grammar
+
+
+def generate_phrase(grammar, start):
+    '''
+    Сгенерировать случайную фразу.
+    '''
+    if start in grammar:
+        seq = random.choice(grammar[start])
+        return ''.join([generate_phrase(grammar, name) for name in seq])
+    return str(start)
+
+
 BNF = '''
-E = "()" | "{}" | E E | "(" E ")" | "{" E "}"
+E = ( E ) | { E } |
 '''
 
 for i in range(10):
     print(generate_phrase(parse_bnf(BNF), 'E'))
+
 ```
+
+![image](https://github.com/user-attachments/assets/57d4fa82-30fb-4429-a046-c020d431f21f)
+
 
 ### Задача 5
 Язык выражений алгебры логики.
-```bash
+
+```
+import random
+
+
+def parse_bnf(text):
+    '''
+    Преобразовать текстовую запись БНФ в словарь.
+    '''
+    grammar = {}
+    rules = [line.split('=') for line in text.strip().split('\n')]
+    for name, body in rules:
+        grammar[name.strip()] = [alt.split() for alt in body.split('|')]
+    return grammar
+
+
+def generate_phrase(grammar, start):
+    '''
+    Сгенерировать случайную фразу.
+    '''
+    if start in grammar:
+        seq = random.choice(grammar[start])
+        return ''.join([generate_phrase(grammar, name) for name in seq])
+    return str(start)
+
+
 BNF = '''
 E = "~" E | E "&" E | E "|" E | "(" E ")" | "x" | "y"
 '''
@@ -109,3 +181,5 @@ E = "~" E | E "&" E | E "|" E | "(" E ")" | "x" | "y"
 for i in range(10):
     print(generate_phrase(parse_bnf(BNF), 'E'))
 ```
+
+![image](https://github.com/user-attachments/assets/55f65680-3f48-4f3a-9036-a6475ba7a563)
